@@ -2,5 +2,6 @@ package com.thomasgassmann.anw;
 
 public interface Graph {
     int vertexCount();
-    int edgeCount();
+    int degree(int v);
+    int[] edges(int u);
 }
