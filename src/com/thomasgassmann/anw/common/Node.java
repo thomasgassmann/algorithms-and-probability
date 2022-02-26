@@ -1,4 +1,4 @@
-package com.thomasgassmann.anw;
+package com.thomasgassmann.anw.common;
 
 public class Node<T> {
     private T _value;

@@ -1,4 +1,6 @@
-package com.thomasgassmann.anw;
+package com.thomasgassmann.anw.graphs;
+
+import com.thomasgassmann.anw.common.LinkedList;
 
 import java.util.HashSet;
 

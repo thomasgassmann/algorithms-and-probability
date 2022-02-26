@@ -1,4 +1,4 @@
-package com.thomasgassmann.anw;
+package com.thomasgassmann.anw.graphs;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

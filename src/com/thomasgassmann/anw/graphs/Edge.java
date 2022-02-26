@@ -1,4 +1,4 @@
-package com.thomasgassmann.anw;
+package com.thomasgassmann.anw.graphs;
 
 public class Edge {
     private final int _from;

@@ -1,4 +1,4 @@
-package com.thomasgassmann.anw;
+package com.thomasgassmann.anw.graphs;
 
 public interface Graph {
     int vertexCount();
