@@ -17,41 +17,62 @@ public class HamiltonianCycleCount {
                 return !bitSet.get(start) && bitSet.cardinality() != 0;
             }
         })) {
-            z += (int)Math.pow(-1, subset.cardinality()) * countWalks(graph, start, subset);
+            int multiplier = (int)Math.pow(-1, subset.cardinality());
+            z += multiplier * countWalks(graph, start, subset);
         }
 
         return z / 2;
     }
 
-    // basically Floyd-Warshall with scalar product to count walks
-    // from vertex back to vertex using some excluded vertices
     // we only consider the subgraph induced by removing the excluded
     // vertices. This could be done a bit more efficiently if we used
     // matrix multiplication with iterative multiplication.
     private static int countWalks(Graph graph, int vertex, BitSet exclude) {
-        int[][] m = new int[graph.vertexCount()][graph.vertexCount()];
+        int[][] paths = new int[graph.vertexCount()][graph.vertexCount()];
         for (int u = 0; u < graph.vertexCount(); u++) {
             for (int v : graph.edges(u)) {
-                if (exclude.get(u) || exclude.get(v)) {
-                    continue;
-                }
-
-                m[u][v] = 1;
-            }
-        }
-
-        for (int k = 0; k < graph.vertexCount(); k++) {
-            for (int u = 0; u < graph.vertexCount(); u++) {
-                for (int v = 0; v < graph.vertexCount(); v++) {
-                    if (exclude.get(u) || exclude.get(v) || exclude.get(k)) {
-                        continue;
-                    }
-
-                    m[u][v] = m[u][v] + m[u][k] * m[k][v];
+                if (!exclude.get(u) && !exclude.get(v)) {
+                    paths[u][v] = 1;
                 }
             }
         }
 
+        var m = iterativeSquaring(paths, graph.vertexCount());
         return m[vertex][vertex];
+    }
+
+    private static int[][] iterativeSquaring(int[][] a, int n) {
+        if (n == 1) {
+            return a;
+        }
+
+        if (n == 0) {
+            throw new IllegalArgumentException("Shouldn't happen");
+        }
+
+        var res = iterativeSquaring(a, n / 2);
+        var mul = multiply(res, res);
+        if (n % 2 == 0) {
+            return mul;
+        } else {
+            return multiply(mul, a);
+        }
+    }
+
+    // this is not Strassen! :)
+    private static int[][] multiply(int[][] a, int[][] b) {
+        int[][] c = new int[a.length][b[0].length];
+        for (int u = 0; u < a.length; u++) {
+            for (int v = 0; v < b[0].length; v++) {
+                int sum = 0;
+                for (int k = 0; k < a[0].length; k++) {
+                    sum += a[u][k] * b[k][v];
+                }
+
+                c[u][v] = sum;
+            }
+        }
+
+        return c;
     }
 }

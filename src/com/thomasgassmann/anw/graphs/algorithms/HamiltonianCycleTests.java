@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class HamiltonianCycleTests {
     @Test
     public void checkHamiltonianCycle() {
-        var cube = new HyperCube(4);
+        var cube = new HyperCube(3);
         var res = HamiltonianCycle.containsHamiltonianCycle(cube);
         Assertions.assertTrue(res);
     }

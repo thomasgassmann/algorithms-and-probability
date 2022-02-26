@@ -4,22 +4,37 @@ import java.util.BitSet;
 import java.util.function.Function;
 
 public class BitsetIteratorWithCriteria extends BitsetIterator {
-    private final Function<BitSet, Boolean> _pred;
+    private Function<BitSet, Boolean> _fn;
+    private BitSet _next;
+    private boolean _hasNext;
 
-    public BitsetIteratorWithCriteria(int bitsetSize, Function<BitSet, Boolean> predicate) {
+    public BitsetIteratorWithCriteria(int bitsetSize, Function<BitSet, Boolean> fn) {
         super(bitsetSize);
-        _pred = predicate;
+        _fn = fn;
+        findNext();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return _next != null;
     }
 
     @Override
     public BitSet next() {
-        BitSet res;
-        while ((res = super.next()) != null) {
-            if (_pred.apply(res)) {
-                return res;
+        var returnValue = _next;
+        this.findNext();
+        return returnValue;
+    }
+
+    private void findNext() {
+        while (super.hasNext()) {
+            _next = super.next();
+            if (_fn.apply(_next)) {
+                return;
             }
         }
 
-        return null;
+        this._next = null;
+        this._hasNext = false;
     }
 }
