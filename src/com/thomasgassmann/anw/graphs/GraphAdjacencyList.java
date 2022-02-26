@@ -35,6 +35,11 @@ public class GraphAdjacencyList implements Graph {
     }
 
     @Override
+    public boolean hasEdge(int u, int v) {
+        return _adjacency[u].stream().anyMatch(p -> p.equals(v));
+    }
+
+    @Override
     public boolean isDirected() {
         return _isDirected;
     }
