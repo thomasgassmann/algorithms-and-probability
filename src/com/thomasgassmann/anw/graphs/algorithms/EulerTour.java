@@ -1,6 +1,8 @@
-package com.thomasgassmann.anw.graphs;
+package com.thomasgassmann.anw.graphs.algorithms;
 
 import com.thomasgassmann.anw.common.LinkedList;
+import com.thomasgassmann.anw.graphs.Edge;
+import com.thomasgassmann.anw.graphs.Graph;
 
 import java.util.HashSet;
 

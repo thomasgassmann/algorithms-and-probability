@@ -1,5 +1,6 @@
-package com.thomasgassmann.anw.graphs;
+package com.thomasgassmann.anw.graphs.algorithms;
 
+import com.thomasgassmann.anw.graphs.GraphAdjacencyList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

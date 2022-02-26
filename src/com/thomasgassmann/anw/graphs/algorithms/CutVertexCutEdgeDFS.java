@@ -1,4 +1,6 @@
-package com.thomasgassmann.anw.graphs;
+package com.thomasgassmann.anw.graphs.algorithms;
+
+import com.thomasgassmann.anw.graphs.Graph;
 
 public class CutVertexCutEdgeDFS {
     public static class Result {
