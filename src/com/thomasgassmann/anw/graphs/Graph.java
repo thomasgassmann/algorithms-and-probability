@@ -6,4 +6,5 @@ public interface Graph {
     boolean hasEdge(int u, int v);
     boolean isDirected();
     int[] edges(int u);
+    Iterable<Edge> edges();
 }

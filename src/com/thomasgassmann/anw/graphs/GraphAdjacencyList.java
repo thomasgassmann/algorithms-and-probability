@@ -1,6 +1,8 @@
 package com.thomasgassmann.anw.graphs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class GraphAdjacencyList implements Graph {
     private ArrayList<Integer>[] _adjacency;
@@ -47,5 +49,38 @@ public class GraphAdjacencyList implements Graph {
     @Override
     public int[] edges(int u) {
         return _adjacency[u].stream().mapToInt(p -> p).toArray();
+    }
+
+    @Override
+    public Iterable<Edge> edges() {
+        return new Iterable<Edge>() {
+            @Override
+            public Iterator<Edge> iterator() {
+                return new Iterator<Edge>() {
+                    private int _current = 0;
+                    private int _currentEdge = 0;
+
+                    @Override
+                    public boolean hasNext() {
+                        return _current < _adjacency.length &&
+                               _currentEdge < _adjacency[_current].size();
+                    }
+
+                    @Override
+                    public Edge next() {
+                        int from = _current;
+                        int to = _adjacency[from].get(_currentEdge);
+                        if (_currentEdge < _adjacency[_current].size() - 1) {
+                            _currentEdge++;
+                        } else {
+                            _current++;
+                            _currentEdge = 0;
+                        }
+
+                        return new Edge(from, to, isDirected());
+                    }
+                };
+            }
+        };
     }
 }

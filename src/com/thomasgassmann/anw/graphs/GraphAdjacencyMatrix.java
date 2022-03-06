@@ -1,5 +1,7 @@
 package com.thomasgassmann.anw.graphs;
 
+import java.util.Iterator;
+
 public class GraphAdjacencyMatrix implements Graph {
     private final boolean[][] _matrix;
 
@@ -45,5 +47,10 @@ public class GraphAdjacencyMatrix implements Graph {
         }
 
         return res;
+    }
+
+    @Override
+    public Iterable<Edge> edges() {
+        throw new RuntimeException("Not implemented yet");
     }
 }
