@@ -19,6 +19,5 @@ public class GreedyColoringTests {
         Assertions.assertEquals(1, c.get(1));
         Assertions.assertEquals(2, c.get(2));
         Assertions.assertEquals(0, c.get(3));
-
     }
 }
