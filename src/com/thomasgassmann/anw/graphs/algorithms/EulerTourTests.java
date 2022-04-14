@@ -26,7 +26,7 @@ public class EulerTourTests {
         int i = 0;
         var current = res.head();
         while (current != null) {
-            Assertions.assertEquals(expected[i++], current.value());
+            Assertions.assertEquals(expected[i++], (int)current.value());
             current = current.next();
         }
     }

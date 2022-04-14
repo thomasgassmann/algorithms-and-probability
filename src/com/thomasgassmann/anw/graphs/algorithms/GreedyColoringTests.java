@@ -15,9 +15,9 @@ public class GreedyColoringTests {
         g.addUndirectedEdge(2, 1);
 
         var c = GreedyColoring.find(g);
-        Assertions.assertEquals(0, c.get(0));
-        Assertions.assertEquals(1, c.get(1));
-        Assertions.assertEquals(2, c.get(2));
-        Assertions.assertEquals(0, c.get(3));
+        Assertions.assertEquals(0, (int)c.get(0));
+        Assertions.assertEquals(1, (int)c.get(1));
+        Assertions.assertEquals(2, (int)c.get(2));
+        Assertions.assertEquals(0, (int)c.get(3));
     }
 }
