@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 public class GraphAdjacencyList implements Graph {
-    private ArrayList<Integer>[] _adjacency;
-    private boolean _isDirected = false;
+    protected ArrayList<Integer>[] _adjacency;
+    protected boolean _isDirected = false;
 
     public GraphAdjacencyList(int vertexCount) {
         _adjacency = new ArrayList[vertexCount];
