@@ -1,6 +1,35 @@
 package com.thomasgassmann.anw.exercises;
 
 public class FiniteSlotMachine {
+
+    private static double alt(int m, int[] cards) {
+        int n = cards.length;
+        // dp[i][j]: probability of choosing card j as i-th card
+        double[][] dp = new double[n][n];
+        for (int j = 0; j < n; j++) {
+            dp[0][j] = cards[j] / m;
+        }
+
+        for (int i = 1; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                for (int k = j - 1; k >= 0; k--) {
+                    dp[i][j] += dp[i - 1][k] * cards[j] / (m - i);
+                }
+            }
+        }
+
+        double res = 0;
+        for (int j = 0; j < n; j++) {
+            if (cards[j] >= 2) {
+                for (int i = 0; i < Math.min(m - 1, n); i++) {
+                    res += dp[i][j] * (cards[j] - 1) / (m - i - 1);
+                }
+            }
+        }
+
+        return res;
+    }
+
     private static double[][] probseqlen(int[] cards, int m) {
         // probs[i][k]: prob of getting a strictly increasing
         // sequence of length k using all cards j < i
