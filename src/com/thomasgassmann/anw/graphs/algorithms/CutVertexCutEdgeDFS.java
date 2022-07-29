@@ -42,7 +42,7 @@ public class CutVertexCutEdgeDFS {
 
                 // if the smallest item we can reach from item
                 // is greater than vertex, we have a cut vertex
-                if (low[item] >= dfs[vertex]) {
+                if (low[item] >= dfs[vertex] && vertex != 0) {
                     r.isCutVertex[vertex] = true;
                     // if it's strictly greater, we have a cut edge
                     if (low[item] > dfs[vertex]) {
